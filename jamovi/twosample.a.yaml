@@ -1,0 +1,62 @@
+---
+name:  twosample
+title: Two Sample Non-parametric Bootstrap
+menuGroup: bootstrap
+version: '1.0.0'
+jas: '1.2'
+
+options:
+    - name: data
+      type: Data
+
+    - name: dep
+      title: Dependent Variable
+      type: Variable
+
+    - name: group
+      title: Grouping Variable (two levels)
+      type: Variable
+
+    - name: stat
+      title: Statistic
+      type: List
+      options:
+        - title: Mean
+          name:  stat_mean
+        - title: Median
+          name:  stat_median
+        - title: SD
+          name:  stat_sd
+        - title: Var
+          name:  stat_var
+      default: stat_mean
+    
+    - name: comparison
+      title: Method of Comparison
+      type: List
+      options:
+        - title: Difference
+          name: comp_diff
+        - title: Ratio
+          name: comp_ratio
+      default: comp_diff
+        
+    - name: conflevel
+      title: Confidence Level
+      type: Integer
+      min: 1
+      max: 100
+      default: 95
+
+    - name: replicates
+      title: Bootstrap Replicates
+      type: Integer
+      min: 100
+      max: 1e8
+      default: 1000
+
+    - name: plot
+      title: Produce a plot of the bootstrap distribution.
+      type: Bool
+      default: true
+...
