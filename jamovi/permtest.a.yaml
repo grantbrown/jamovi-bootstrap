@@ -1,0 +1,51 @@
+---
+name:  permtest
+title: Two Sample Permutation Test
+menuGroup: bootstrap
+version: '1.0.0'
+jas: '1.2'
+
+options:
+    - name: data
+      type: Data
+
+    - name: dep
+      title: Dependent Variable
+      type: Variable
+
+    - name: group
+      title: Grouping Variable
+      type: Variable
+      
+    - name: stat
+      title: Statistic
+      type: List
+      options:
+        - title: Mean
+          name:  stat_mean
+        - title: Quantile
+          name:  stat_qtile
+        - title: SD
+          name:  stat_sd
+        - title: Var
+          name:  stat_var
+      default: stat_mean
+      
+    - name: qtile_det
+      title: Quantile Value   
+      type: Integer
+      min: 1
+      max: 100
+      default: 50
+      
+      
+    - name: replicates
+      title: Simulation Replicates
+      type: Integer
+      min: 100
+      max: 1e8
+      default: 1000
+
+    
+
+...

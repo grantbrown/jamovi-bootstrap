@@ -1,0 +1,18 @@
+---
+name:  onesample
+title: One Sample Non-parametric Bootstrap
+jrs:   '1.1'
+
+items:
+    - name:  text
+      title: One Sample Non-parametric Bootstrap
+      type:  Preformatted
+    
+    - name: plot
+      title: Bootstrap Plot
+      type: Image
+      width: 400
+      height: 300
+      renderFun: .plot
+
+...

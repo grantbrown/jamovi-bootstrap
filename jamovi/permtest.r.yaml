@@ -1,0 +1,11 @@
+---
+name:  permtest
+title: Two Sample Permutation Test
+jrs:   '1.1'
+
+items:
+    - name:  text
+      title: Two Sample Permutation Test
+      type:  Preformatted
+
+...
