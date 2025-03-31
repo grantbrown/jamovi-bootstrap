@@ -1,16 +1,17 @@
 ---
-title: What the Package Does (Title Case)
+title: Basic bootstrapping and permutation tools for Jamovi
 name: bootstrap
-version: 0.0.0
+version: 0.0.1
 jms: '1.0'
 authors:
-  - Who wrote it
-maintainer: The package maintainer <yourself@somewhere.net>
-date: '1970-01-01'
+  - Grant Brown
+maintainer: Grant Brown <grant.brown73@gmail.com>
+date: '2025-03-31'
 type: R
 description: >-
-  More about what it does (maybe more than one line) Use four spaces when
-  indenting paragraphs within the Description.
+  Really basic tools for bootstrapping in popular statistical software: Jamovi
+  Supports one and two sample non-parametric bootstrap, two-sample permutaiton
+  tests. 
 analyses:
   - title: One Sample Non-parametric Bootstrap
     name: onesample
