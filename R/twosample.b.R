@@ -36,12 +36,34 @@ twosampleClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           levs <- as.character(unique(self$data[[self$options$group]]))
         }
         
+        # Check if we have the correct values for stat_odds
+        if (self$options$stat == "stat_odds"){
+          if (!all(as.integer(sort(unique(self$data[[self$options$dep]]))) == c(0,1))){
+            self$results$text$setContent("Odds requires a dependent variable coded 0 and 1") 
+            return()
+          }
+        }
+      
         M <- model.matrix(formula, data = self$data)
         alpha <- (100-self$options$conflevel)/100
+        nullstat <- function(x){
+          stop("Invalid statistic")
+        }
+        odds <- function(x){
+          x <- as.integer(x)
+          sum(x==1)/(sum(x == 0))
+        }
+        
+        qtfunc <- function(x){
+          quantile(x, probs = self$options$quantile/100)
+        }
+        
         stat <- ifelse(self$options$stat == "stat_mean", mean,
-                       ifelse(self$options$stat == "stat_median", median,
-                              ifelse(self$options$stat == "stat_sd", sd, 
-                                     ifelse(self$options$stat == "stat_var", var, mean))))
+               ifelse(self$options$stat == "stat_median", median,
+               ifelse(self$options$stat == "stat_sd", sd, 
+               ifelse(self$options$stat == "stat_var", var, 
+               ifelse(self$options$stat == "stat_odds", odds, 
+               ifelse(self$options$stat == "stat_quantile", qtfunc, nullstat))))))
         
         
         if (ncol(M) != 2){

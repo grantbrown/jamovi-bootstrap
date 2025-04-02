@@ -9,6 +9,7 @@ twosampleOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             dep = NULL,
             group = NULL,
             stat = "stat_mean",
+            quantile = 50,
             comparison = "comp_diff",
             conflevel = 95,
             replicates = 1000,
@@ -32,9 +33,17 @@ twosampleOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=list(
                     "stat_mean",
                     "stat_median",
+                    "stat_quantile",
+                    "stat_odds",
                     "stat_sd",
                     "stat_var"),
                 default="stat_mean")
+            private$..quantile <- jmvcore::OptionInteger$new(
+                "quantile",
+                quantile,
+                min=1,
+                max=100,
+                default=50)
             private$..comparison <- jmvcore::OptionList$new(
                 "comparison",
                 comparison,
@@ -62,6 +71,7 @@ twosampleOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$.addOption(private$..dep)
             self$.addOption(private$..group)
             self$.addOption(private$..stat)
+            self$.addOption(private$..quantile)
             self$.addOption(private$..comparison)
             self$.addOption(private$..conflevel)
             self$.addOption(private$..replicates)
@@ -71,6 +81,7 @@ twosampleOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         dep = function() private$..dep$value,
         group = function() private$..group$value,
         stat = function() private$..stat$value,
+        quantile = function() private$..quantile$value,
         comparison = function() private$..comparison$value,
         conflevel = function() private$..conflevel$value,
         replicates = function() private$..replicates$value,
@@ -79,6 +90,7 @@ twosampleOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
         ..dep = NA,
         ..group = NA,
         ..stat = NA,
+        ..quantile = NA,
         ..comparison = NA,
         ..conflevel = NA,
         ..replicates = NA,
@@ -138,6 +150,7 @@ twosampleBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @param dep .
 #' @param group .
 #' @param stat .
+#' @param quantile .
 #' @param comparison .
 #' @param conflevel .
 #' @param replicates .
@@ -154,6 +167,7 @@ twosample <- function(
     dep,
     group,
     stat = "stat_mean",
+    quantile = 50,
     comparison = "comp_diff",
     conflevel = 95,
     replicates = 1000,
@@ -175,6 +189,7 @@ twosample <- function(
         dep = dep,
         group = group,
         stat = stat,
+        quantile = quantile,
         comparison = comparison,
         conflevel = conflevel,
         replicates = replicates,
